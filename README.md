@@ -22,7 +22,7 @@ MailProbe-Py is a statistical email classifier that uses Bayesian analysis to id
 ### Using Poetry (Recommended)
 
 ```bash
-git clone https://github.com/yourusername/mailprobe-py
+git clone https://github.com/huntsberg/mailprobe-py
 cd mailprobe-py
 poetry install
 ```
@@ -36,7 +36,7 @@ pip install mailprobe-py
 For development:
 
 ```bash
-git clone https://github.com/yourusername/mailprobe-py
+git clone https://github.com/huntsberg/mailprobe-py
 cd mailprobe-py
 poetry install --with dev
 ```
@@ -64,7 +64,7 @@ poetry install --with dev
 ### Python API Usage (Recommended for Integration)
 
 ```python
-from spamprobe import MailProbeAPI
+from mailprobe import MailProbeAPI
 
 # Create email classifier
 with MailProbeAPI() as spam_filter:
@@ -85,7 +85,7 @@ with MailProbeAPI() as spam_filter:
 ### Convenience Functions
 
 ```python
-from spamprobe import classify_email, get_spam_probability
+from mailprobe import classify_email, get_spam_probability
 
 # Quick classification
 is_spam = classify_email("From: test@example.com\nSubject: Test\n\nHello")
@@ -97,7 +97,7 @@ probability = get_spam_probability("From: test@example.com\nSubject: Test\n\nHel
 MailProbe-Py supports classification into multiple categories beyond just spam/not-spam:
 
 ```python
-from spamprobe import MultiCategoryFilter, FolderBasedClassifier
+from mailprobe import MultiCategoryFilter, FolderBasedClassifier
 
 # Multi-category classification
 categories = ['work', 'personal', 'newsletters', 'spam']
@@ -175,7 +175,7 @@ MailProbe-Py includes a comprehensive test suite with **97 tests** and **81% cod
 poetry run pytest
 
 # Run tests with coverage
-poetry run pytest --cov=src/spamprobe --cov-report=html
+poetry run pytest --cov=src/mailprobe --cov-report=html
 
 # Run specific test categories
 poetry run pytest tests/test_api.py      # API tests

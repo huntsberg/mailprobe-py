@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Email client integration examples
 - Machine learning enhancements
 
-## [0.1.0] - 2024-01-31
+## [0.1.0] - 2025-08-31
 
 ### Added
 
@@ -185,11 +185,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Permission checking** for database operations
 
 #### Compatibility
-- **Python 3.8+** support
+- **Python 3.8-3.13** support
 - **Cross-platform** compatibility (Windows, macOS, Linux)
 - **Unicode handling** for international emails
 - **Various email formats** (mbox, Maildir, individual files)
 - **Configurable character encoding** handling
+
+### Fixed
+- **Package naming consistency** - Corrected all `spamprobe` references to `mailprobe` throughout documentation
+- **Import statements** - Fixed all example code to use correct `mailprobe` package name
+- **Test references** - Updated test files to use correct package paths
+- **Coverage commands** - Fixed coverage reporting to target correct package
+- **Documentation examples** - Ensured all code examples use proper import statements
+
+### Changed
+- **Python version support** - Extended support to include Python 3.13
+- **Black formatting** - Applied consistent code formatting across entire codebase
+- **Author information** - Updated package metadata with proper author and contact details
+- **Repository URLs** - Updated all GitHub repository references to correct location
+- **PyPI preparation** - Configured package for PyPI release with proper metadata
 
 ### Development Infrastructure
 
@@ -217,14 +231,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Initial project structure
-- Basic email classifiering concept
+- Basic email filtering concept
 - Poetry configuration setup
 
 ---
 
 ## Version History Summary
 
-- **v0.1.0** (2024-01-31): Complete implementation with comprehensive features
+- **v0.1.0** (2025-08-31): Complete implementation with comprehensive features
 - **v0.0.1** (2024-01-30): Initial project setup
 
 ## Migration Notes

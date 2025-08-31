@@ -172,7 +172,7 @@ poetry run pytest tests/test_cli.py
 poetry run pytest -v
 
 # With coverage report
-poetry run pytest --cov=src/spamprobe --cov-report=html
+poetry run pytest --cov=src/mailprobe --cov-report=html
 ```
 
 ### Run Tests by Pattern

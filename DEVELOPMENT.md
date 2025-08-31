@@ -32,7 +32,7 @@ This guide covers development setup, testing, and contribution guidelines for Ma
 
 ```
 mailprobe-py/
-├── src/spamprobe/          # Main package source code
+├── src/mailprobe/          # Main package source code
 │   ├── __init__.py         # Package initialization
 │   ├── cli.py              # Command-line interface
 │   ├── config.py           # Configuration management
@@ -63,7 +63,7 @@ poetry run pytest
 Run tests with coverage:
 
 ```bash
-poetry run pytest --cov=spamprobe --cov-report=html
+poetry run pytest --cov=mailprobe --cov-report=html
 ```
 
 Run specific test files:
@@ -95,7 +95,7 @@ poetry run flake8 src/ tests/
 Type checking with mypy:
 
 ```bash
-poetry run mypy src/spamprobe/
+poetry run mypy src/mailprobe/
 ```
 
 Run all quality checks:
@@ -104,7 +104,7 @@ Run all quality checks:
 poetry run black src/ tests/
 poetry run isort src/ tests/
 poetry run flake8 src/ tests/
-poetry run mypy src/spamprobe/
+poetry run mypy src/mailprobe/
 poetry run pytest
 ```
 

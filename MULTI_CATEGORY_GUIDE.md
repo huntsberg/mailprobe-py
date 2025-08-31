@@ -17,7 +17,7 @@ The multi-category system allows you to:
 ### Basic Multi-Category Classification
 
 ```python
-from spamprobe import MultiCategoryFilter
+from mailprobe import MultiCategoryFilter
 
 # Define your categories
 categories = ['work', 'personal', 'newsletters', 'spam']
@@ -50,7 +50,7 @@ with MultiCategoryFilter(categories) as classifier:
 ### Folder-Based Classification
 
 ```python
-from spamprobe import FolderBasedClassifier
+from mailprobe import FolderBasedClassifier
 
 # Organize emails in folders:
 # emails/
@@ -364,7 +364,7 @@ with MultiCategoryFilter(['work', 'personal', 'spam']) as classifier:
 ### Custom Filter Configuration
 
 ```python
-from spamprobe import FilterConfig
+from mailprobe import FilterConfig
 
 # Create custom configuration
 config = FilterConfig(
@@ -574,7 +574,7 @@ print(f"Score breakdown: {result.all_scores}")
 For quick operations without setting up full classifiers:
 
 ```python
-from spamprobe import classify_into_categories, train_from_folder_structure
+from mailprobe import classify_into_categories, train_from_folder_structure
 
 # Quick classification
 categories = ['work', 'personal', 'spam']

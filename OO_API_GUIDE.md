@@ -7,7 +7,7 @@ MailProbe-Py provides a clean, object-oriented API that makes it easy to integra
 ### Basic Usage
 
 ```python
-from spamprobe import MailProbeAPI
+from mailprobe import MailProbeAPI
 
 # Create a email classifier instance
 spam_filter = MailProbeAPI()
@@ -33,7 +33,7 @@ spam_filter.close()
 ### Using Context Manager (Recommended)
 
 ```python
-from spamprobe import MailProbeAPI
+from mailprobe import MailProbeAPI
 
 with MailProbeAPI() as spam_filter:
     # Train and classify
@@ -109,7 +109,7 @@ spam_filter.reset_database()
 For processing large volumes of email efficiently.
 
 ```python
-from spamprobe import MailProbeAPI, BatchMailFilter
+from mailprobe import MailProbeAPI, BatchMailFilter
 
 with MailProbeAPI() as api:
     batch_filter = BatchMailFilter(api)
@@ -158,7 +158,7 @@ print(f"Database updated: {result.database_updated}")
 For quick one-off operations:
 
 ```python
-from spamprobe import classify_email, get_spam_probability, train_from_directories
+from mailprobe import classify_email, get_spam_probability, train_from_directories
 
 # Quick classification
 is_spam = classify_email(email_content)
@@ -175,7 +175,7 @@ results = train_from_directories("good_emails/", "spam_emails/")
 ### Using Configuration Objects
 
 ```python
-from spamprobe import MailProbeAPI, FilterConfig
+from mailprobe import MailProbeAPI, FilterConfig
 
 # Custom configuration
 config = FilterConfig(
@@ -236,7 +236,7 @@ class EmailFilter:
 ```python
 import os
 from pathlib import Path
-from spamprobe import MailProbeAPI, BatchMailFilter
+from mailprobe import MailProbeAPI, BatchMailFilter
 
 def process_mailbox_directory(mailbox_dir):
     with MailProbeAPI() as api:
@@ -299,7 +299,7 @@ class AdaptiveMailFilter:
 ## Error Handling
 
 ```python
-from spamprobe import MailProbeAPI
+from mailprobe import MailProbeAPI
 import logging
 
 logging.basicConfig(level=logging.INFO)
@@ -343,7 +343,7 @@ The MailProbeAPI is **not thread-safe**. For multi-threaded applications, create
 
 ```python
 import threading
-from spamprobe import MailProbeAPI
+from mailprobe import MailProbeAPI
 
 # Thread-local storage for email classifiers
 thread_local = threading.local()

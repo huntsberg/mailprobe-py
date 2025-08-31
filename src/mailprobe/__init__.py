@@ -8,17 +8,17 @@ It supports both traditional email classifiering and multi-category classificati
 For easy integration into other scripts, use the high-level API:
 
     from mailprobe import MailProbeAPI
-    
+
     # Create filter instance
     mail_filter = MailProbeAPI()
-    
+
     # Train on messages
     mail_filter.train_good("path/to/good/emails")
     mail_filter.train_spam("path/to/spam/emails")
-    
+
     # Classify new messages
     is_spam = mail_filter.classify("path/to/email.txt")
-    
+
     # Or classify from string
     email_content = "From: test@example.com\\nSubject: Test\\n\\nHello"
     is_spam = mail_filter.classify_text(email_content)
@@ -26,7 +26,7 @@ For easy integration into other scripts, use the high-level API:
 For multi-category classification:
 
     from mailprobe import MultiCategoryFilter
-    
+
     categories = ['work', 'personal', 'newsletters', 'spam']
     with MultiCategoryFilter(categories) as classifier:
         classifier.train_category('work', work_emails)
@@ -36,13 +36,13 @@ For multi-category classification:
 For convenience functions:
 
     from mailprobe import classify_email, get_spam_probability
-    
+
     is_spam = classify_email(email_content)
     probability = get_spam_probability(email_content)
 """
 
 __version__ = "0.1.0"
-__author__ = "MailProbe-Py Contributors"
+__author__ = "Peter Bowen"
 
 # High-level API (recommended for integration)
 from .api import (
@@ -75,13 +75,12 @@ from .config import MailProbeConfig, ConfigManager
 __all__ = [
     # High-level API
     "MailProbeAPI",
-    "BatchMailFilter", 
+    "BatchMailFilter",
     "ClassificationResult",
     "TrainingResult",
     "classify_email",
     "train_from_directories",
     "get_spam_probability",
-    
     # Multi-category classification
     "MultiCategoryFilter",
     "FolderBasedClassifier",
@@ -89,7 +88,6 @@ __all__ = [
     "CategoryTrainingResult",
     "classify_into_categories",
     "train_from_folder_structure",
-    
     # Low-level components
     "MailFilter",
     "FilterConfig",

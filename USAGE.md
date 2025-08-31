@@ -152,8 +152,8 @@ spam/
 
 ```python
 from pathlib import Path
-from spamprobe import MailFilter, FilterConfig
-from spamprobe.message import EmailMessage
+from mailprobe import MailFilter, FilterConfig
+from mailprobe.message import EmailMessage
 
 # Initialize filter
 config = FilterConfig()
