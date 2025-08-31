@@ -1,0 +1,65 @@
+[tool.poetry]
+name = "mailprobe-py"
+version = "0.1.0"
+description = "A Python implementation of advanced Bayesian email classification and filtering"
+authors = ["Your Name <your.email@example.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/yourusername/mailprobe-py"
+repository = "https://github.com/yourusername/mailprobe-py"
+documentation = "https://github.com/yourusername/mailprobe-py"
+keywords = ["email", "filter", "bayesian", "classification", "spam", "multi-category"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Communications :: Email :: Filters",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+packages = [{include = "mailprobe", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+click = "^8.0.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.0.0"
+pytest-cov = "^4.0.0"
+black = "^22.0.0"
+isort = "^5.0.0"
+flake8 = "^5.0.0"
+mypy = "^1.0.0"
+
+[tool.poetry.scripts]
+mailprobe-py = "mailprobe.cli:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "--cov=mailprobe --cov-report=term-missing"

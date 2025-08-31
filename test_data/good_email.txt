@@ -1,0 +1,4 @@
+From: friend@example.com
+Subject: Meeting tomorrow
+
+Let's meet for lunch at the usual place.
