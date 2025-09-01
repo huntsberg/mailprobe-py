@@ -111,28 +111,33 @@ class MailProbeConfig:
     def get_database_path(self) -> Path:
         """Get the resolved database path."""
         path = Path(self.database.path).expanduser().resolve()
-        
+
         # Handle Windows path length limitations
-        if os.name == 'nt' and len(str(path)) > 260:
+        if os.name == "nt" and len(str(path)) > 260:
             # Use short path on Windows if too long
             try:
                 import ctypes
                 from ctypes import wintypes
-                
+
                 # Get short path name
                 GetShortPathNameW = ctypes.windll.kernel32.GetShortPathNameW
-                GetShortPathNameW.argtypes = [wintypes.LPCWSTR, wintypes.LPWSTR, wintypes.DWORD]
+                GetShortPathNameW.argtypes = [
+                    wintypes.LPCWSTR,
+                    wintypes.LPWSTR,
+                    wintypes.DWORD,
+                ]
                 GetShortPathNameW.restype = wintypes.DWORD
-                
+
                 buffer = ctypes.create_unicode_buffer(260)
                 if GetShortPathNameW(str(path), buffer, 260):
                     path = Path(buffer.value)
             except (ImportError, AttributeError, OSError):
                 # Fallback: use a shorter path in temp directory
                 import tempfile
+
                 temp_dir = Path(tempfile.gettempdir()) / "mailprobe-py"
                 path = temp_dir
-        
+
         path.mkdir(parents=True, exist_ok=True)
         return path
 

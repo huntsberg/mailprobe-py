@@ -103,9 +103,8 @@ __all__ = [
     "EmailMessageReader",
     "MailProbeConfig",
     "ConfigManager",
-    
     # Utilities
     "normalize_path",
-    "get_default_database_path", 
+    "get_default_database_path",
     "is_windows",
 ]
