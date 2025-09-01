@@ -1,5 +1,10 @@
 # MailProbe-Py
 
+[![CI](https://github.com/huntsberg/mailprobe-py/actions/workflows/ci.yml/badge.svg)](https://github.com/huntsberg/mailprobe-py/actions/workflows/ci.yml)
+[![PyPI version](https://badge.fury.io/py/mailprobe-py.svg)](https://badge.fury.io/py/mailprobe-py)
+[![Python versions](https://img.shields.io/pypi/pyversions/mailprobe-py.svg)](https://pypi.org/project/mailprobe-py/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A Python implementation of the MailProbe Bayesian email classifier, inspired by the original C++ MailProbe by Burton Computer Corporation.
 
 ## Overview
