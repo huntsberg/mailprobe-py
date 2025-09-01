@@ -67,7 +67,9 @@ def normalize_path(path: Union[str, Path]) -> Path:
     return path
 
 
-def safe_open_text(filepath: Union[str, Path], mode: str = "r", **kwargs: Any) -> IO[str]:
+def safe_open_text(
+    filepath: Union[str, Path], mode: str = "r", **kwargs: Any
+) -> IO[str]:
     """
     Safely open a text file with proper encoding and line ending handling.
 
@@ -130,7 +132,8 @@ def is_long_path_supported() -> bool:
         # Check Windows version and long path support
         if winreg is not None:
             key = winreg.OpenKey(
-                winreg.HKEY_LOCAL_MACHINE, r"SYSTEM\CurrentControlSet\Control\FileSystem"
+                winreg.HKEY_LOCAL_MACHINE,
+                r"SYSTEM\CurrentControlSet\Control\FileSystem",
             )
             value, _ = winreg.QueryValueEx(key, "LongPathsEnabled")
             winreg.CloseKey(key)

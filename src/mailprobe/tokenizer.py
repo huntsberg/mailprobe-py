@@ -27,7 +27,11 @@ class Token:
     FLAG_ANY = 0xFFFF
 
     def __init__(
-        self, text: str, flags: int = FLAG_WORD, prefix: Optional[str] = None, count: int = 1
+        self,
+        text: str,
+        flags: int = FLAG_WORD,
+        prefix: Optional[str] = None,
+        count: int = 1,
     ):
         self.text = text
         self.flags = flags
