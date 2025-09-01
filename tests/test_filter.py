@@ -1,10 +1,11 @@
 """Tests for the email classifier."""
 
-import pytest
 import tempfile
 from pathlib import Path
 
-from mailprobe.filter import MailFilter, FilterConfig, MailScore
+import pytest
+
+from mailprobe.filter import FilterConfig, MailFilter, MailScore
 from mailprobe.message import EmailMessage
 
 

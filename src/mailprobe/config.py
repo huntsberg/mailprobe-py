@@ -7,12 +7,12 @@ for the email classifier system.
 
 import json
 import os
+from dataclasses import asdict, dataclass, fields
 from pathlib import Path
-from typing import Dict, Any, Optional, Union
-from dataclasses import dataclass, asdict, fields
+from typing import Any, Dict, Optional, Union
 
 from .filter import FilterConfig
-from .utils import safe_open_text, normalize_path, get_default_database_path
+from .utils import get_default_database_path, normalize_path, safe_open_text
 
 
 @dataclass

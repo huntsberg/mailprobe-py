@@ -8,9 +8,9 @@ word frequencies used in Bayesian spam analysis.
 import sqlite3
 import threading
 import time
-from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Iterator
 from contextlib import contextmanager
+from pathlib import Path
+from typing import Dict, Iterator, List, Optional, Tuple
 
 from .tokenizer import Token
 from .utils import normalize_path

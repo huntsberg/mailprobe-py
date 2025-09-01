@@ -1,13 +1,14 @@
 """Tests for the high-level API."""
 
-import pytest
 import tempfile
 from pathlib import Path
 
+import pytest
+
 from mailprobe.api import (
-    MailProbeAPI,
     BatchMailFilter,
     ClassificationResult,
+    MailProbeAPI,
     TrainingResult,
     classify_email,
     get_spam_probability,

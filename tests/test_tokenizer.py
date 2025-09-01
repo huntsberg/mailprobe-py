@@ -1,8 +1,9 @@
 """Tests for the email tokenizer."""
 
 import pytest
-from mailprobe.tokenizer import EmailTokenizer, Token
+
 from mailprobe.message import EmailMessage
+from mailprobe.tokenizer import EmailTokenizer, Token
 
 
 class TestEmailTokenizer:

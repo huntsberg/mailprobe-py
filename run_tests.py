@@ -5,8 +5,8 @@ Convenient test runner for MailProbe-Py.
 This script provides an easy way to run tests with various options.
 """
 
-import sys
 import subprocess
+import sys
 from pathlib import Path
 
 

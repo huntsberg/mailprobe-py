@@ -6,16 +6,16 @@ multiple categories and corpuses, allowing for flexible email classification
 into different folders or categories.
 """
 
-from typing import Dict, List, Optional, Tuple, Union, Any
-from pathlib import Path
-from dataclasses import dataclass
 import json
 import tempfile
 from collections import defaultdict
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple, Union
 
-from .filter import MailFilter, FilterConfig
-from .message import EmailMessage, EmailMessageReader
 from .database import WordDatabase
+from .filter import FilterConfig, MailFilter
+from .message import EmailMessage, EmailMessageReader
 
 
 @dataclass

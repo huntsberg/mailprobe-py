@@ -43,8 +43,8 @@ def normalize_path(path: Union[str, Path]) -> Path:
                 path = Path(buffer.value)
         except (ImportError, AttributeError, OSError):
             # Fallback: use a shorter path
-            import tempfile
             import hashlib
+            import tempfile
 
             # Create a hash-based short path
             path_hash = hashlib.md5(str(path).encode()).hexdigest()[:8]

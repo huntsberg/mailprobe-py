@@ -46,34 +46,34 @@ __author__ = "Peter Bowen"
 
 # High-level API (recommended for integration)
 from .api import (
-    MailProbeAPI,
     BatchMailFilter,
     ClassificationResult,
+    MailProbeAPI,
     TrainingResult,
     classify_email,
-    train_from_directories,
     get_spam_probability,
+    train_from_directories,
 )
+from .config import ConfigManager, MailProbeConfig
+from .database import WordData, WordDatabase
+
+# Low-level components (for advanced usage)
+from .filter import FilterConfig, MailFilter, MailScore
+from .message import EmailMessage, EmailMessageReader
 
 # Multi-category classification
 from .multi_category import (
-    MultiCategoryFilter,
-    FolderBasedClassifier,
     CategoryResult,
     CategoryTrainingResult,
+    FolderBasedClassifier,
+    MultiCategoryFilter,
     classify_into_categories,
     train_from_folder_structure,
 )
-
-# Low-level components (for advanced usage)
-from .filter import MailFilter, FilterConfig, MailScore
-from .database import WordDatabase, WordData
 from .tokenizer import EmailTokenizer, Token
-from .message import EmailMessage, EmailMessageReader
-from .config import MailProbeConfig, ConfigManager
 
 # Utilities
-from .utils import normalize_path, get_default_database_path, is_windows
+from .utils import get_default_database_path, is_windows, normalize_path
 
 __all__ = [
     # High-level API

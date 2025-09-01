@@ -77,3 +77,8 @@ python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
 addopts = "--cov=mailprobe --cov-report=term-missing"
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = ["E203", "W503", "F401", "F841"]
+exclude = [".git", "__pycache__", "build", "dist", ".venv"]

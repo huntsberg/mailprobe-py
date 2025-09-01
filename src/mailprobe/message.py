@@ -8,13 +8,13 @@ including support for various mailbox formats and MIME decoding.
 import email
 import email.policy
 import hashlib
+import mailbox
 import re
 from email.message import EmailMessage as StdEmailMessage
 from pathlib import Path
-from typing import Dict, List, Optional, Union, Iterator, TextIO
-import mailbox
+from typing import Dict, Iterator, List, Optional, TextIO, Union
 
-from .utils import safe_open_text, normalize_path
+from .utils import normalize_path, safe_open_text
 
 
 class EmailMessage:

@@ -1,8 +1,9 @@
 """Tests for email message parsing."""
 
-import pytest
 import tempfile
 from pathlib import Path
+
+import pytest
 
 from mailprobe.message import EmailMessage, EmailMessageReader, MessageDigestCache
 

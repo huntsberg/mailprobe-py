@@ -250,3 +250,71 @@ config.ini
 settings.ini
 .env.local
 .env.production
+
+# MailProbe-specific files
+# Default database location
+.mailprobe-py/
+mailprobe.db
+
+# Test data and temporary directories
+test_emails/
+temp_emails/
+sample_data/
+
+# Backup files
+*.bak
+*.backup
+
+# Editor temporary files
+*~
+.#*
+\#*#
+
+# PyPI and build artifacts
+twine.log
+.twine/
+
+# Security scanning reports
+safety-report.txt
+bandit-report.json
+
+# Performance profiling
+*.prof
+*.pstats
+
+# Local development overrides
+local_config.py
+dev_settings.py
+
+# Documentation build artifacts (if using Sphinx later)
+docs/_build/
+docs/_static/
+docs/_templates/
+
+# Jupyter notebooks (if added later)
+*.ipynb
+.ipynb_checkpoints/
+
+# Local test databases
+test_*.db
+test_*.sqlite
+test_*.sqlite3
+
+# Coverage reports in different formats
+.coverage.*
+coverage.json
+coverage.lcov
+
+# Linting cache files
+.flake8_cache/
+.pylint.d/
+
+# Type checking cache
+.mypy_cache/
+.pytype/
+.pyre/
+
+# Local email storage for development
+emails/
+mail_samples/
+training_data/

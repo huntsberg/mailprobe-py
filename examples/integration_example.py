@@ -12,8 +12,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from mailprobe import (
-    MailProbeAPI,
     BatchMailFilter,
+    MailProbeAPI,
     classify_email,
     get_spam_probability,
     train_from_directories,

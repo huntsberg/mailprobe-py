@@ -5,13 +5,13 @@ This module implements the tokenization logic similar to the original MailProbe,
 extracting meaningful terms from email headers and body content.
 """
 
-import re
-import html
 import base64
+import html
 import quopri
-from typing import List, Set, Dict, Iterator, Optional, Tuple
-from urllib.parse import urlparse
+import re
 from email.header import decode_header
+from typing import Dict, Iterator, List, Optional, Set, Tuple
+from urllib.parse import urlparse
 
 
 class Token:

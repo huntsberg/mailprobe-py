@@ -5,16 +5,16 @@ This module provides a clean, easy-to-use interface for integrating
 MailProbe-Py into other applications and scripts.
 """
 
-from pathlib import Path
-from typing import Optional, Union, List, Dict, Any, Tuple
-from dataclasses import dataclass
-import tempfile
 import shutil
+import tempfile
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple, Union
 
-from .filter import MailFilter, FilterConfig, MailScore
-from .message import EmailMessage, EmailMessageReader
-from .config import MailProbeConfig, ConfigManager
+from .config import ConfigManager, MailProbeConfig
 from .database import WordDatabase
+from .filter import FilterConfig, MailFilter, MailScore
+from .message import EmailMessage, EmailMessageReader
 from .utils import get_default_database_path, normalize_path
 
 

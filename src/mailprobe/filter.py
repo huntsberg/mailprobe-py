@@ -6,13 +6,13 @@ database operations, and Bayesian scoring to classify email messages.
 """
 
 import math
-from pathlib import Path
-from typing import Dict, List, Optional, Tuple, NamedTuple
 from dataclasses import dataclass
+from pathlib import Path
+from typing import Dict, List, NamedTuple, Optional, Tuple
 
-from .database import WordDatabase, WordData
-from .tokenizer import EmailTokenizer, Token
+from .database import WordData, WordDatabase
 from .message import EmailMessage
+from .tokenizer import EmailTokenizer, Token
 
 
 @dataclass

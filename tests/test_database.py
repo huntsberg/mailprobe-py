@@ -1,11 +1,12 @@
 """Tests for the word frequency database."""
 
-import pytest
 import tempfile
 import time
 from pathlib import Path
 
-from mailprobe.database import WordDatabase, WordData
+import pytest
+
+from mailprobe.database import WordData, WordDatabase
 
 
 class TestWordData:

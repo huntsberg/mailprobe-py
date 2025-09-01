@@ -7,17 +7,17 @@ into multiple categories beyond just spam/not-spam, such as different
 folders or types of emails.
 """
 
-import sys
-from pathlib import Path
-import tempfile
 import shutil
+import sys
+import tempfile
+from pathlib import Path
 
 # Add src to path for development
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from mailprobe import (
-    MultiCategoryFilter,
     FolderBasedClassifier,
+    MultiCategoryFilter,
     classify_into_categories,
     train_from_folder_structure,
 )

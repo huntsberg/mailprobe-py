@@ -1,19 +1,20 @@
 """Tests for multi-category classification."""
 
-import pytest
-import tempfile
 import json
+import tempfile
 from pathlib import Path
 
+import pytest
+
+from mailprobe.message import EmailMessage
 from mailprobe.multi_category import (
-    MultiCategoryFilter,
-    FolderBasedClassifier,
     CategoryResult,
     CategoryTrainingResult,
+    FolderBasedClassifier,
+    MultiCategoryFilter,
     classify_into_categories,
     train_from_folder_structure,
 )
-from mailprobe.message import EmailMessage
 
 
 class TestMultiCategoryFilter:

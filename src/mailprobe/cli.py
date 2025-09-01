@@ -6,14 +6,14 @@ that match the original MailProbe functionality.
 """
 
 import sys
-import click
 from pathlib import Path
 from typing import List, Optional, TextIO
 
+import click
+
 from .config import ConfigManager, MailProbeConfig, get_default_config_path
 from .filter import MailFilter
-from .message import EmailMessageReader, EmailMessage
-
+from .message import EmailMessage, EmailMessageReader
 
 # Global configuration object
 _config: Optional[MailProbeConfig] = None

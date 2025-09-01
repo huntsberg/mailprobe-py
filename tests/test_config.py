@@ -1,16 +1,17 @@
 """Tests for configuration management."""
 
-import pytest
-import tempfile
 import json
+import tempfile
 from pathlib import Path
 
+import pytest
+
 from mailprobe.config import (
-    DatabaseConfig,
-    TokenizerConfig,
-    ScoringConfig,
-    MailProbeConfig,
     ConfigManager,
+    DatabaseConfig,
+    MailProbeConfig,
+    ScoringConfig,
+    TokenizerConfig,
     load_config,
     save_config,
 )
