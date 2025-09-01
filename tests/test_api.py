@@ -35,7 +35,8 @@ class TestMailProbeAPI:
 
     def test_api_initialization(self):
         """Test API initialization."""
-        assert self.api.database_path == self.db_path
+        # Use resolved paths to handle macOS symlinks (/var -> /private/var)
+        assert self.api.database_path.resolve() == self.db_path.resolve()
         assert self.api.config is not None
 
         # Database should be created
