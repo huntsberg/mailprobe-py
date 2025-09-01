@@ -9,7 +9,7 @@ import shutil
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, cast
 
 from .config import ConfigManager, MailProbeConfig
 from .database import WordDatabase
@@ -411,7 +411,7 @@ class MailProbeAPI:
         else:
             sources = source
 
-        messages = []
+        messages: List[EmailMessage] = []
         for src in sources:
             path = Path(src)
             if path.exists():
@@ -508,8 +508,8 @@ class BatchMailFilter:
 
     def train_batch(
         self,
-        good_sources: List[Union[str, Path]] = None,
-        spam_sources: List[Union[str, Path]] = None,
+        good_sources: Optional[List[Union[str, Path]]] = None,
+        spam_sources: Optional[List[Union[str, Path]]] = None,
         selective: bool = False,
     ) -> Dict[str, TrainingResult]:
         """
@@ -579,7 +579,10 @@ def train_from_directories(
         spam_files = list(Path(spam_dir).glob("*"))
 
         batch_filter = BatchMailFilter(api)
-        return batch_filter.train_batch(good_files, spam_files)
+        return batch_filter.train_batch(
+            cast(List[Union[str, Path]], good_files),
+            cast(List[Union[str, Path]], spam_files),
+        )
 
 
 def get_spam_probability(

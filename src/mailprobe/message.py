@@ -43,8 +43,8 @@ class EmailMessage:
                 raw_message = raw_message.decode("utf-8", errors="ignore")
 
             # Parse the message using email library
-            self._message = email.message_from_string(
-                raw_message, policy=email.policy.default
+            self._message = email.message_from_string(  # type: ignore
+                raw_message, policy=email.policy.default  # type: ignore
             )
 
         self._digest: Optional[str] = None
@@ -228,7 +228,7 @@ class EmailMessageReader:
         try:
             mbox = mailbox.mbox(str(filepath))
             for message in mbox:
-                yield EmailMessage(message)
+                yield EmailMessage(message)  # type: ignore
         except Exception as e:
             # Fallback to manual parsing if mailbox module fails
             yield from self._read_mbox_manual(filepath)
@@ -236,7 +236,7 @@ class EmailMessageReader:
     def _read_mbox_manual(self, filepath: Path) -> Iterator[EmailMessage]:
         """Manually parse mbox format file."""
         with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
-            current_message = []
+            current_message: List[str] = []
             in_message = False
 
             for line in f:
@@ -267,7 +267,7 @@ class EmailMessageReader:
         try:
             maildir = mailbox.Maildir(str(maildir_path))
             for message in maildir:
-                yield EmailMessage(message)
+                yield EmailMessage(message)  # type: ignore
         except Exception:
             # Fallback to manual reading
             for subdir in ["new", "cur"]:

@@ -167,7 +167,7 @@ class MailFilter:
             if previous_classification == is_spam:
                 # Same classification, no update needed
                 return False
-            else:
+            elif previous_classification is not None:
                 # Reclassification needed
                 return self._reclassify_message(
                     message, is_spam, previous_classification
@@ -194,7 +194,10 @@ class MailFilter:
         exists, previous_classification = self.database.contains_message(message.digest)
 
         if exists:
-            if previous_classification != is_spam:
+            if (
+                previous_classification is not None
+                and previous_classification != is_spam
+            ):
                 # Reclassification needed
                 return self._reclassify_message(
                     message, is_spam, previous_classification
@@ -237,7 +240,7 @@ class MailFilter:
         tokens = self.tokenizer.tokenize_message(message)
 
         # Count token frequencies
-        token_counts = {}
+        token_counts: Dict[str, int] = {}
         for token in tokens:
             key = token.get_key()
             token_counts[key] = token_counts.get(key, 0) + 1
@@ -326,7 +329,7 @@ class MailFilter:
 
         # Select top tokens
         selected_tokens = []
-        term_counts = {}
+        term_counts: Dict[str, int] = {}
 
         for token in significant_tokens:
             # Limit repeats of same term
@@ -395,7 +398,7 @@ class MailFilter:
         tokens = self.tokenizer.tokenize_message(message)
 
         # Count token frequencies
-        token_counts = {}
+        token_counts: Dict[str, int] = {}
         for token in tokens:
             key = token.get_key()
             token_counts[key] = token_counts.get(key, 0) + 1
@@ -422,7 +425,7 @@ class MailFilter:
         tokens = self.tokenizer.tokenize_message(message)
 
         # Count token frequencies
-        token_counts = {}
+        token_counts: Dict[str, int] = {}
         for token in tokens:
             key = token.get_key()
             token_counts[key] = token_counts.get(key, 0) + 1

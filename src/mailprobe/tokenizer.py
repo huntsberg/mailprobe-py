@@ -10,7 +10,7 @@ import html
 import quopri
 import re
 from email.header import decode_header
-from typing import Dict, Iterator, List, Optional, Set, Tuple, Any
+from typing import Any, Dict, Iterator, List, Optional, Set, Tuple
 from urllib.parse import urlparse
 
 

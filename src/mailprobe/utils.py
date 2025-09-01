@@ -8,14 +8,14 @@ differences, particularly for Windows compatibility.
 import os
 import sys
 from pathlib import Path
-from typing import Union, TextIO, Any, IO
+from typing import IO, Any, TextIO, Union
 
 # Windows-specific imports with proper type handling
 if sys.platform == "win32":
     try:
         import ctypes
-        from ctypes import wintypes
         import winreg
+        from ctypes import wintypes
     except ImportError:
         ctypes = None  # type: ignore
         wintypes = None  # type: ignore

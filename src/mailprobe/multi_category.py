@@ -482,7 +482,7 @@ class FolderBasedClassifier:
             category_path = self.base_path / category
             if category_path.exists() and category_path.is_dir():
                 # Get all email files in the category folder
-                email_files = []
+                email_files: List[Path] = []
                 for ext in ["*.txt", "*.eml", "*.msg"]:
                     email_files.extend(category_path.glob(ext))
 

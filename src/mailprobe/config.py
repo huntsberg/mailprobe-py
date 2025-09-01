@@ -7,9 +7,22 @@ for the email classifier system.
 
 import json
 import os
-from dataclasses import asdict, dataclass, fields
+import sys
+from dataclasses import asdict, dataclass, field, fields
 from pathlib import Path
 from typing import Any, Dict, Optional, Union
+
+# Windows-specific imports with proper type handling
+if sys.platform == "win32":
+    try:
+        import ctypes
+        from ctypes import wintypes
+    except ImportError:
+        ctypes = None  # type: ignore
+        wintypes = None  # type: ignore
+else:
+    ctypes = None  # type: ignore
+    wintypes = None  # type: ignore
 
 from .filter import FilterConfig
 from .utils import get_default_database_path, normalize_path, safe_open_text
@@ -42,11 +55,7 @@ class TokenizerConfig:
     # Header processing
     process_headers: bool = True
     header_mode: str = "normal"  # normal, all, nox, none
-    custom_headers: list = None
-
-    def __post_init__(self):
-        if self.custom_headers is None:
-            self.custom_headers = []
+    custom_headers: list = field(default_factory=list)
 
 
 @dataclass
@@ -69,21 +78,13 @@ class ScoringConfig:
 class MailProbeConfig:
     """Main configuration class for MailProbe-Py."""
 
-    database: DatabaseConfig = None
-    tokenizer: TokenizerConfig = None
-    scoring: ScoringConfig = None
+    database: DatabaseConfig = field(default_factory=DatabaseConfig)
+    tokenizer: TokenizerConfig = field(default_factory=TokenizerConfig)
+    scoring: ScoringConfig = field(default_factory=ScoringConfig)
 
     # Global settings
     verbose: bool = False
     debug: bool = False
-
-    def __post_init__(self):
-        if self.database is None:
-            self.database = DatabaseConfig()
-        if self.tokenizer is None:
-            self.tokenizer = TokenizerConfig()
-        if self.scoring is None:
-            self.scoring = ScoringConfig()
 
     def to_filter_config(self) -> FilterConfig:
         """Convert to FilterConfig for use with MailFilter."""
@@ -116,21 +117,19 @@ class MailProbeConfig:
         if os.name == "nt" and len(str(path)) > 260:
             # Use short path on Windows if too long
             try:
-                import ctypes
-                from ctypes import wintypes
+                if ctypes is not None and wintypes is not None:
+                    # Get short path name
+                    GetShortPathNameW = ctypes.windll.kernel32.GetShortPathNameW
+                    GetShortPathNameW.argtypes = [
+                        wintypes.LPCWSTR,
+                        wintypes.LPWSTR,
+                        wintypes.DWORD,
+                    ]
+                    GetShortPathNameW.restype = wintypes.DWORD
 
-                # Get short path name
-                GetShortPathNameW = ctypes.windll.kernel32.GetShortPathNameW
-                GetShortPathNameW.argtypes = [
-                    wintypes.LPCWSTR,
-                    wintypes.LPWSTR,
-                    wintypes.DWORD,
-                ]
-                GetShortPathNameW.restype = wintypes.DWORD
-
-                buffer = ctypes.create_unicode_buffer(260)
-                if GetShortPathNameW(str(path), buffer, 260):
-                    path = Path(buffer.value)
+                    buffer = ctypes.create_unicode_buffer(260)
+                    if GetShortPathNameW(str(path), buffer, 260):
+                        path = Path(buffer.value)
             except (ImportError, AttributeError, OSError):
                 # Fallback: use a shorter path in temp directory
                 import tempfile
@@ -161,7 +160,7 @@ class ConfigManager:
             config_file: Optional path to configuration file
         """
         self.config_file = config_file
-        self._config: Optional[MailProbeConfig] = None
+        self._config: MailProbeConfig = MailProbeConfig()
 
     def load_config(self, config_file: Optional[Path] = None) -> MailProbeConfig:
         """
