@@ -15,6 +15,7 @@ from .filter import MailFilter, FilterConfig, MailScore
 from .message import EmailMessage, EmailMessageReader
 from .config import MailProbeConfig, ConfigManager
 from .database import WordDatabase
+from .utils import get_default_database_path, normalize_path
 
 
 @dataclass
@@ -87,9 +88,9 @@ class MailProbeAPI:
         """
         # Set up database path
         if database_path is None:
-            self.database_path = Path.home() / ".mailprobe-py"
+            self.database_path = get_default_database_path()
         else:
-            self.database_path = Path(database_path)
+            self.database_path = normalize_path(database_path)
 
         # Handle configuration
         if config is None:

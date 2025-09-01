@@ -6,11 +6,13 @@ for the email classifier system.
 """
 
 import json
+import os
 from pathlib import Path
 from typing import Dict, Any, Optional, Union
 from dataclasses import dataclass, asdict, fields
 
 from .filter import FilterConfig
+from .utils import safe_open_text, normalize_path, get_default_database_path
 
 
 @dataclass
@@ -109,6 +111,28 @@ class MailProbeConfig:
     def get_database_path(self) -> Path:
         """Get the resolved database path."""
         path = Path(self.database.path).expanduser().resolve()
+        
+        # Handle Windows path length limitations
+        if os.name == 'nt' and len(str(path)) > 260:
+            # Use short path on Windows if too long
+            try:
+                import ctypes
+                from ctypes import wintypes
+                
+                # Get short path name
+                GetShortPathNameW = ctypes.windll.kernel32.GetShortPathNameW
+                GetShortPathNameW.argtypes = [wintypes.LPCWSTR, wintypes.LPWSTR, wintypes.DWORD]
+                GetShortPathNameW.restype = wintypes.DWORD
+                
+                buffer = ctypes.create_unicode_buffer(260)
+                if GetShortPathNameW(str(path), buffer, 260):
+                    path = Path(buffer.value)
+            except (ImportError, AttributeError, OSError):
+                # Fallback: use a shorter path in temp directory
+                import tempfile
+                temp_dir = Path(tempfile.gettempdir()) / "mailprobe-py"
+                path = temp_dir
+        
         path.mkdir(parents=True, exist_ok=True)
         return path
 
@@ -176,7 +200,7 @@ class ConfigManager:
         # Convert to dictionary and save as JSON
         config_dict = self._config_to_dict(config)
 
-        with open(self.config_file, "w") as f:
+        with safe_open_text(self.config_file, "w") as f:
             json.dump(config_dict, f, indent=2)
 
     def get_config(self) -> MailProbeConfig:
@@ -252,7 +276,7 @@ class ConfigManager:
     def _load_from_file(self, config_file: Path) -> MailProbeConfig:
         """Load configuration from JSON file."""
         try:
-            with open(config_file, "r") as f:
+            with safe_open_text(config_file) as f:
                 config_dict = json.load(f)
 
             return self._dict_to_config(config_dict)

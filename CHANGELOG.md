@@ -197,6 +197,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Test references** - Updated test files to use correct package paths
 - **Coverage commands** - Fixed coverage reporting to target correct package
 - **Documentation examples** - Ensured all code examples use proper import statements
+- **Windows compatibility** - Fixed path handling, file encoding, and line ending issues for Windows
+- **Cross-platform paths** - Added utilities for handling long paths and platform-specific directories
 
 ### Changed
 - **Python version support** - Updated minimum requirement to Python 3.9+ (removed 3.8 due to type annotation compatibility)
@@ -205,6 +207,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Repository URLs** - Updated all GitHub repository references to correct location
 - **PyPI preparation** - Configured package for PyPI release with proper metadata
 - **CI/CD pipeline** - Added GitHub Actions for automated testing and deployment
+- **GitHub Actions versions** - Updated to latest action versions (upload-artifact@v4, setup-python@v5, etc.)
 
 ### Development Infrastructure
 

@@ -14,6 +14,8 @@ from pathlib import Path
 from typing import Dict, List, Optional, Union, Iterator, TextIO
 import mailbox
 
+from .utils import safe_open_text, normalize_path
+
 
 class EmailMessage:
     """
@@ -178,7 +180,7 @@ class EmailMessageReader:
         Yields:
             EmailMessage objects
         """
-        filepath = Path(filepath)
+        filepath = normalize_path(filepath)
 
         if not filepath.exists():
             raise FileNotFoundError(f"File not found: {filepath}")
@@ -188,7 +190,7 @@ class EmailMessageReader:
             yield from self._read_maildir(filepath)
         else:
             # Try to determine format by content
-            with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
+            with safe_open_text(filepath) as f:
                 content = f.read()
 
             if self._is_mbox_format(content):
@@ -274,9 +276,7 @@ class EmailMessageReader:
                     for msg_file in subdir_path.iterdir():
                         if msg_file.is_file() and not msg_file.name.startswith("."):
                             try:
-                                with open(
-                                    msg_file, "r", encoding="utf-8", errors="ignore"
-                                ) as f:
+                                with safe_open_text(msg_file) as f:
                                     content = f.read()
                                 yield EmailMessage(content)
                             except Exception:

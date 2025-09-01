@@ -72,6 +72,9 @@ from .tokenizer import EmailTokenizer, Token
 from .message import EmailMessage, EmailMessageReader
 from .config import MailProbeConfig, ConfigManager
 
+# Utilities
+from .utils import normalize_path, get_default_database_path, is_windows
+
 __all__ = [
     # High-level API
     "MailProbeAPI",
@@ -100,4 +103,9 @@ __all__ = [
     "EmailMessageReader",
     "MailProbeConfig",
     "ConfigManager",
+    
+    # Utilities
+    "normalize_path",
+    "get_default_database_path", 
+    "is_windows",
 ]

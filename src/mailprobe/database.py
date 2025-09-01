@@ -13,6 +13,7 @@ from typing import Dict, List, Optional, Tuple, Iterator
 from contextlib import contextmanager
 
 from .tokenizer import Token
+from .utils import normalize_path
 
 
 class WordData:
@@ -110,7 +111,7 @@ class WordDatabase:
             db_path: Path to the SQLite database file
             cache_size: Size of in-memory word cache
         """
-        self.db_path = Path(db_path)
+        self.db_path = normalize_path(db_path)
         self.cache_size = cache_size
         self._cache: Dict[str, WordData] = {}
         self._cache_lock = threading.RLock()
