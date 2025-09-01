@@ -10,7 +10,7 @@ import html
 import quopri
 import re
 from email.header import decode_header
-from typing import Dict, Iterator, List, Optional, Set, Tuple
+from typing import Dict, Iterator, List, Optional, Set, Tuple, Any
 from urllib.parse import urlparse
 
 
@@ -27,11 +27,11 @@ class Token:
     FLAG_ANY = 0xFFFF
 
     def __init__(
-        self, text: str, flags: int = FLAG_WORD, prefix: str = "", count: int = 1
+        self, text: str, flags: int = FLAG_WORD, prefix: Optional[str] = None, count: int = 1
     ):
         self.text = text
         self.flags = flags
-        self.prefix = prefix
+        self.prefix = prefix or ""
         self.count = count
         self.spam_count = 0
         self.good_count = 0
@@ -150,7 +150,7 @@ class EmailTokenizer:
         # Whitespace normalization
         self.whitespace_pattern = re.compile(r"\s+")
 
-    def tokenize_message(self, message) -> List[Token]:
+    def tokenize_message(self, message: Any) -> List[Token]:
         """
         Tokenize an email message and return list of tokens.
 
@@ -335,7 +335,7 @@ class EmailTokenizer:
         phrase_tokens = []
 
         # Group tokens by type (header prefix or body)
-        token_groups = {}
+        token_groups: Dict[str, List[Token]] = {}
         for token in tokens:
             if token.flags & Token.FLAG_WORD:
                 key = token.prefix if token.prefix else "body"

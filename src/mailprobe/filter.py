@@ -8,7 +8,7 @@ database operations, and Bayesian scoring to classify email messages.
 import math
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List, NamedTuple, Optional, Tuple
+from typing import Any, Dict, List, NamedTuple, Optional, Tuple
 
 from .database import WordData, WordDatabase
 from .message import EmailMessage
@@ -281,7 +281,7 @@ class MailFilter:
         """
         return self.database.purge_words(max_count)
 
-    def get_database_info(self) -> Dict[str, any]:
+    def get_database_info(self) -> Dict[str, Any]:
         """Get information about the database."""
         return self.database.get_database_info()
 

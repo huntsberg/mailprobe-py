@@ -10,7 +10,7 @@ import threading
 import time
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Dict, Iterator, List, Optional, Tuple
+from typing import Any, Dict, Iterator, List, Optional, Tuple
 
 from .tokenizer import Token
 from .utils import normalize_path
@@ -450,7 +450,7 @@ class WordDatabase:
         with self._get_connection() as conn:
             conn.execute("VACUUM")
 
-    def get_database_info(self) -> Dict[str, any]:
+    def get_database_info(self) -> Dict[str, Any]:
         """Get information about the database."""
         with self._get_connection() as conn:
             # Get word count

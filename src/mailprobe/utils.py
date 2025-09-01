@@ -8,7 +8,22 @@ differences, particularly for Windows compatibility.
 import os
 import sys
 from pathlib import Path
-from typing import Union
+from typing import Union, TextIO, Any, IO
+
+# Windows-specific imports with proper type handling
+if sys.platform == "win32":
+    try:
+        import ctypes
+        from ctypes import wintypes
+        import winreg
+    except ImportError:
+        ctypes = None  # type: ignore
+        wintypes = None  # type: ignore
+        winreg = None  # type: ignore
+else:
+    ctypes = None  # type: ignore
+    wintypes = None  # type: ignore
+    winreg = None  # type: ignore
 
 
 def normalize_path(path: Union[str, Path]) -> Path:
@@ -27,20 +42,18 @@ def normalize_path(path: Union[str, Path]) -> Path:
     if os.name == "nt" and len(str(path)) > 260:
         try:
             # Try to get short path name on Windows
-            import ctypes
-            from ctypes import wintypes
+            if ctypes is not None and wintypes is not None:
+                GetShortPathNameW = ctypes.windll.kernel32.GetShortPathNameW
+                GetShortPathNameW.argtypes = [
+                    wintypes.LPCWSTR,
+                    wintypes.LPWSTR,
+                    wintypes.DWORD,
+                ]
+                GetShortPathNameW.restype = wintypes.DWORD
 
-            GetShortPathNameW = ctypes.windll.kernel32.GetShortPathNameW
-            GetShortPathNameW.argtypes = [
-                wintypes.LPCWSTR,
-                wintypes.LPWSTR,
-                wintypes.DWORD,
-            ]
-            GetShortPathNameW.restype = wintypes.DWORD
-
-            buffer = ctypes.create_unicode_buffer(260)
-            if GetShortPathNameW(str(path), buffer, 260):
-                path = Path(buffer.value)
+                buffer = ctypes.create_unicode_buffer(260)
+                if GetShortPathNameW(str(path), buffer, 260):
+                    path = Path(buffer.value)
         except (ImportError, AttributeError, OSError):
             # Fallback: use a shorter path
             import hashlib
@@ -54,7 +67,7 @@ def normalize_path(path: Union[str, Path]) -> Path:
     return path
 
 
-def safe_open_text(filepath: Union[str, Path], mode: str = "r", **kwargs):
+def safe_open_text(filepath: Union[str, Path], mode: str = "r", **kwargs: Any) -> IO[str]:
     """
     Safely open a text file with proper encoding and line ending handling.
 
@@ -115,15 +128,14 @@ def is_long_path_supported() -> bool:
 
     try:
         # Check Windows version and long path support
-        import winreg
-
-        key = winreg.OpenKey(
-            winreg.HKEY_LOCAL_MACHINE, r"SYSTEM\CurrentControlSet\Control\FileSystem"
-        )
-        value, _ = winreg.QueryValueEx(key, "LongPathsEnabled")
-        winreg.CloseKey(key)
-
-        return bool(value)
+        if winreg is not None:
+            key = winreg.OpenKey(
+                winreg.HKEY_LOCAL_MACHINE, r"SYSTEM\CurrentControlSet\Control\FileSystem"
+            )
+            value, _ = winreg.QueryValueEx(key, "LongPathsEnabled")
+            winreg.CloseKey(key)
+            return bool(value)
+        return False
     except (ImportError, FileNotFoundError, OSError):
         return False
 
