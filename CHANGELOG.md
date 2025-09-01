@@ -185,7 +185,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Permission checking** for database operations
 
 #### Compatibility
-- **Python 3.8-3.13** support
+- **Python 3.9-3.13** support
 - **Cross-platform** compatibility (Windows, macOS, Linux)
 - **Unicode handling** for international emails
 - **Various email formats** (mbox, Maildir, individual files)
@@ -199,11 +199,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Documentation examples** - Ensured all code examples use proper import statements
 
 ### Changed
-- **Python version support** - Extended support to include Python 3.13
+- **Python version support** - Updated minimum requirement to Python 3.9+ (removed 3.8 due to type annotation compatibility)
 - **Black formatting** - Applied consistent code formatting across entire codebase
 - **Author information** - Updated package metadata with proper author and contact details
 - **Repository URLs** - Updated all GitHub repository references to correct location
 - **PyPI preparation** - Configured package for PyPI release with proper metadata
+- **CI/CD pipeline** - Added GitHub Actions for automated testing and deployment
 
 ### Development Infrastructure
 
